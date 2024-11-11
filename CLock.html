@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+      body {
+        display: flex;
+        margin: 0;
+        height: 100vh;
+        box-sizing: border-box;
+        align-items: center;
+        justify-content: center;
+      }
+      span {
+        font-family: "Calibri";
+        color: #333;
+      }
+      #clock {
+        font-size: 200px;
+      }
+      #milli {
+        font-size: 100px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <p>
+      <span id="clock"></span>
+      <span id="milli"></span>
+    </p>
+    <script type="text/javascript">
+      var clock = document.getElementById("clock");
+      var milli = document.getElementById("milli");
+      var myInterv = setInterval(function(){
+        var myDate = new Date();
+        clock.innerHTML = addZero(myDate.getHours()) + ":"
+                        + addZero(myDate.getMinutes()) + ":"
+                        + addZero(myDate.getSeconds()) + ".";
+        milli.innerHTML = addZero(Math.floor(myDate.getMilliseconds() / 10));
+      }, 10);
+      function addZero(int){
+        if (int < 10){
+          int = "0" + int;
+        }
+        return int;
+      }
+    </script>
+
+  </body>
+</html>
