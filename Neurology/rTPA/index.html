@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IV Thrombolysis</title>
+  <link rel="stylesheet" href="style.css">
+  <link href='https://fonts.googleapis.com/css?family=Noto+Sans|Material+Icons' rel='stylesheet'>
+</head>
+<body>
+  <div class="container">
+    <h2>IV THROMBOLYSIS CHECKLIST</h2>
+    <p id="disclaimer">
+      This checklist covers standard 0–4.5 h IV thrombolysis ONLY. <br>
+      Extended-window or wake-up stroke protocols are outside this sheet and require stroke consultant decision.<br>
+    </p>
+
+    <fieldset>
+      <legend><strong>BASIC ELIGIBILITY</strong></legend>
+      <div class="question" data-id="q1">
+        <p>1. Suspected acute stroke?</p>
+        <label><input class="true" type="radio" name="q1" value=true> Yes</label>
+        <label><input class="false" type="radio" name="q1" value=false> No</label>
+      </div>
+  
+      <div class="question" data-id="q2">
+        <p>2. Deficit is DISABLING (regardless of NIHSS)?</p>
+        <span>(e.g. aphasia, hemianopia, severe neglect, cannot walk, cannot use dominant hand)</span>
+        <label><input class="true" type="radio" name="q2" value="true"> Yes</label>
+        <label><input class="false" type="radio" name="q2" value="false"> No</label>
+      </div>
+  
+      <div class="question" data-id="q3">
+        <p>3. Last Known Well (LKW) ≤ 4.5 hours?</p>
+        <label><input class="true" type="radio" name="q3" value="true"> Yes</label>
+        <label><input class="false" type="radio" name="q3" value="false"> No</label>
+        <label for="LKW">Last Known Well:</label>
+        <input type="datetime-local" id="LKW" name="LKW" onchange="document.getElementById('LKWr').innerHTML = Onset(this.value) + ' hour(s)'"><br>
+        <span id="LKWr"></span>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend><strong>EXAMINATION AND RELEVANT HISTORY</strong></legend>
+  
+      <div class="question">
+        <label for="NIHSS">4. NIHSS at baseline:</label>
+        <input type="number" id="NIHSS" name="NIHSS" min="0" max="42" onchange="updateNote()"><br>
+        <label for="mRS">5. Pre-stroke mRS (if known):</label>
+        <input type="number" id="mRS" name="mRS" min="0" max="5"><br>
+      </div>
+
+      <div class="question">
+        <p>6. Ask about past medical / surgical / drug history (brief):</p>
+        <ul>
+          <li>Current antiplatelet / anticoagulant drugs? (Warfarin / DOAC / LMWH full dose)</li>
+          <li>Recent intracranial or intraspinal surgery? (within last 3 months)/ Recent major non-cranial surgery or major trauma (within last 14 days)</li>
+          <li>Recent major GI bleed? (within last 3 weeks)</li>
+          <li>Chest or back pain suggesting aortic dissection?</li>
+        </ul>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend><strong>IMMEDIATE ACTION (PARALLEL WORKFLOW)</strong></legend>
+      <div class="question">
+        <label for="Weight">7. Weigh patient or estimate weight (crucial for dosing):</label>
+        <input type="number" id="Weight" name="Weight" min="0" max="100" value="75"><br>
+        <label for="SysBP">8. Blood Pressure: </label>
+        <input type="number" id="SysBP" name="BP" min="0" max="350" onchange="updateNote()"> /
+        <input type="number" id="DiaBP" name="BP" min="0" max="200" onchange="updateNote()"><br>
+        <label for="RBS">9. Blood Glucose:</label>
+        <input type="number" id="RBS" name="RBS" min="0" max="1000" onchange="updateNote()"><br>
+      </div>
+      <div class="question">
+        <label><input class="Action true" type="checkbox" name="Procedure" value="Canula">10. Insert 2 large-bore IV cannulas</label>
+        <label><input class="Action true" type="checkbox" name="Procedure" value="Labs">11. Draw bloods to lab labelled “URGENT STROKE”</label>
+        <label><input class="Action true" type="checkbox" name="Procedure" value="CT">12. Send patient to CT immediately</label>
+      </div>
+    </fieldset>
+    
+    <fieldset>
+      <legend><strong>CT BRAIN</strong></legend>
+      <div class="question" data-id="q13">
+        <p>13. ICH / SAH excluded on CT?</p>
+        <label><input class="true" type="radio" name="q13" value=true> Yes</label>
+        <label><input class="false" type="radio" name="q13" value=false> No</label>
+      </div>
+  
+      <div class="question" data-id="q14">
+        <p>14. Large established infarct (> 1/3 MCA territory) excluded on CT?</p>
+        <label><input class="true" type="radio" name="q14" value="true"> Yes</label>
+        <label><input class="false" type="radio" name="q14" value="false"> No</label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend><strong>VITALS AND QUICK BEDSIDE CORRECTIONS</strong></legend>
+      <div class="question" data-id="q15">
+        <p>15. Fingerstick glucose ≥ 50 mg/dL?</p>
+        <label><input class="true" type="radio" name="q15" value="hi"> Yes</label>
+        <label><input class="warn" type="radio" name="q15" value="low"> No</label>
+      </div>
+      <div class="question" data-id="q155" id="RBSCorrect" style="display: none;">
+        <p>Did Symptoms Persist after correction of RBS?</p>
+        <label><input class="true" type="radio" name="q155" value="yes"> Yes</label>
+        <label><input class="false" type="radio" name="q155" value="not"> No</label>
+      </div>
+  
+      <div class="question" data-id="q16">
+        <p>16. BP ≤ 185/110 mmHg?</p>
+        <label><input class="true" type="radio" name="q16" value="low"> Yes</label>
+        <label><input class="warn" type="radio" name="q16" value="hi"> No</label>
+      </div>
+      <div class="question" data-id="q165" id="BPCorrect" style="display: none;">
+        <p>Were you able to control Bl. Pr. < 185/110?</p>
+        <label><input class="true" type="radio" name="q165" value="yes"> Yes</label>
+        <label><input class="false" type="radio" name="q165" value="not"> No</label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend><strong>ABSOLUTE CONTRAINDICATIONS</strong></legend>
+      <div class="question" data-id="q17">
+        <p>17. Age ≥ 18 years confirmed?</p>
+        <label><input class="true" type="radio" name="q17" value=true> Yes</label>
+        <label><input class="false" type="radio" name="q17" value=false> No</label>
+      </div>
+  
+      <div class="question" data-id="q18">
+        <p>18. Previous spontaneous ICH excluded? (unless structural cause clearly cured)</p>
+        <label><input class="true" type="radio" name="q18" value="true"> Yes</label>
+        <label><input class="false" type="radio" name="q18" value="false"> No</label>
+      </div>
+      <div class="question" data-id="q19">
+        <p>19. Clinical suspicion of SAH excluded?</p>
+        <span>(no thunderclap headache, no meningism, no unexplained ↓ consciousness)?</span>
+        <label><input class="true" type="radio" name="q19" value="true"> Yes</label>
+        <label><input class="false" type="radio" name="q19" value="false"> No</label>
+      </div>
+      <div class="question" data-id="q20">
+        <p>20. Active major internal bleeding and recent major GI bleed (< 3 weeks) excluded?</p>
+        <label><input class="true" type="radio" name="q20" value="true"> Yes</label>
+        <label><input class="false" type="radio" name="q20" value="false"> No</label>
+      </div>
+      <div class="question" data-id="q21">
+        <p>21. Intracranial or intraspinal surgery within last 3 months excluded?</p>
+        <label><input class="true" type="radio" name="q21" value="true"> Yes</label>
+        <label><input class="false" type="radio" name="q21" value="false"> No</label>
+      </div>
+      <div class="question" data-id="q22">
+        <p>22. Major non-cranial major surgery or major trauma within last 14 days excluded?</p>
+        <label><input class="true" type="radio" name="q22" value="true"> Yes</label>
+        <label><input class="false" type="radio" name="q22" value="false"> No</label>
+      </div>
+      <div class="question" data-id="q23">
+        <p>23. Severe bleeding diathesis excluded?</p>
+        <span>(e.g. severe thrombocytopenia, coagulation factor deficiency)?</span>
+        <label><input class="true" type="radio" name="q23" value="true"> Yes</label>
+        <label><input class="false" type="radio" name="q23" value="false"> No</label>
+      </div>
+      <div class="question" data-id="q24">
+        <p>24. Known or strongly suspected infective endocarditis with mycotic aneurysm risk excluded?</p>
+        <label><input class="true" type="radio" name="q24" value="true"> Yes</label>
+        <label><input class="false" type="radio" name="q24" value="false"> No</label>
+      </div>
+      <div class="question" data-id="q25">
+        <p>25. Aortic dissection clinically excluded?</p>
+        <span>(no sudden severe chest and/or back pain with pulse/BP asymmetry or hypotension)?</span>
+        <label><input class="true" type="radio" name="q25" value="true"> Yes</label>
+        <label><input class="false" type="radio" name="q25" value="false"> No</label>
+      </div>
+      <div class="question" data-id="q26">
+        <p>26. Therapeutic LMWH (e.g. Clexane full dose) within last 24 h excluded?</p>
+        <label><input class="true" type="radio" name="q26" value="true"> Yes</label>
+        <label><input class="false" type="radio" name="q26" value="false"> No</label>
+      </div>
+      <div class="question" data-id="q27">
+        <p>27. Severe head trauma with intracranial injury within last 3 months excluded?</p>
+        <label><input class="true" type="radio" name="q27" value="true"> Yes</label>
+        <label><input class="false" type="radio" name="q27" value="false"> No</label>
+      </div>
+      <div class="question" data-id="q28">
+        <p>28. Intra-axial malignant brain tumour excluded?</p>
+        <label><input class="true" type="radio" name="q28" value="true"> Yes</label>
+        <label><input class="false" type="radio" name="q28" value="false"> No</label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend><strong>RELATIVE CONTRAINDICATIONS</strong></legend>
+      <div class="question">
+        <label><input class="false" type="checkbox" name="RC" value="age">Age > 80 yrs?</label>
+        <label><input class="false" type="checkbox" name="RC" value="pregnant">Is the patient a pregnant woman?</label>
+        <label><input class="false" type="checkbox" name="RC" value="fits">Reported seizures at onset?</label>
+        <label><input class="false" type="checkbox" name="RC" value="sickle">Hx of sickle cell disease?</label>
+        <label><input class="false" type="checkbox" name="RC" value="drugs">Hx of illicit drug use?</label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend><strong>LABS & ANTICOAGULANTS DECISION</strong></legend>
+      <div class="question" data-id="qB">
+        <p>Patient ON anticoagulants or with liver/renal disease / bleeding risk?</p>
+        <label><input class="warn" type="radio" name="qB" value=yes> Yes</label>
+        <label><input class="true" type="radio" name="qB" value=not> No</label>
+      </div>
+  
+      <div id="Bleeding" style="display: none;">
+        <div class="question" data-id="q29">
+          <p>29. Platelet count normal or more than 100,000/μL?</p>
+          <label><input class="true" type="radio" name="q29" value="yes"> Yes</label>
+          <label><input class="false" type="radio" name="q29" value="not"> No</label>
+        </div>
+        <div class="question" data-id="q30">
+          <p>30. INR normal or less than 1.7 at time of bolus?</p>
+          <label><input class="true" type="radio" name="q30" value="yes"> Yes</label>
+          <label><input class="false" type="radio" name="q30" value="not"> No</label>
+        </div>
+        <div class="question" data-id="q31">
+          <p>31. aPTT normal or not significantly prolonged?</p>
+          <label><input class="true" type="radio" name="q31" value="yes"> Yes</label>
+          <label><input class="false" type="radio" name="q31" value="not"> No</label>
+        </div>
+        <div class="question" data-id="q32">
+          <p>32. Recent DOAC dose within last 48 h or concern for prolonged DOAC effect excluded?</p>
+          <span>(e.g. severe renal impairment, unclear last dose)</span>
+          <label><input class="true" type="radio" name="q32" value="yes"> Yes</label>
+          <label><input class="false" type="radio" name="q32" value="not"> No</label>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend><strong>FINAL "GO" REVISION</strong></legend>
+
+      <div class="question">
+        <p>CONFIRM ALL BEFORE BOLUS (ALL SHOULD BE TICKED):</p>
+        <label><input class="true" type="checkbox" name="Go" value="Go1">Disabling ischaemic stroke</label>
+        <label><input class="true" type="checkbox" name="Go" value="Go2">Time from LKW ≤ 4.5 h</label>
+        <label><input class="true" type="checkbox" name="Go" value="Go3">CT clear (no haemorrhage, no large infarct)</label>
+        <label><input class="true" type="checkbox" name="Go" value="Go4">BP ≤ 185/110 mmHg (and controlled)</label>
+        <label><input class="true" type="checkbox" name="Go" value="Go5">Glucose acceptable (and mimic excluded)</label>
+        <label><input class="true" type="checkbox" name="Go" value="Go6">All absolute STOP criteria excluded</label>
+        <label><input class="true" type="checkbox" name="Go" value="Go7">Anticoagulant/DOAC situation acceptable</label>
+        <label><input class="true" type="checkbox" name="Go" value="Go8">Risk/Benefit discussed with family/patient and consent signed</label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend><strong>THROMBOLYTIC DOSAGE & ADMINISTRATION</strong></legend>
+      <div class="question" data-id="qF">
+        <p>Choose Thrombolytic agent:</p>
+        <label><input class="true" type="radio" name="qF" value=rTPA> ALTEPLASE (rTPA)</label>
+        <label><input class="true" type="radio" name="qF" value=TNK> TENECTEPLASE (TNK)</label>
+      </div>
+    </fieldset>
+    <div id="contribution">
+      <p>
+        Prepared by Dr. Amir Hani<br>
+        Neurology Specialist<br>
+        Al Sahel Teaching Hospital<br>
+        Al Salam Al Mohandessin Hospital
+      </p>
+      <p>
+        Developed by Ahmed Salah<br>
+      </p>
+    </div>
+  </div>
+
+  <div id="noteBox">
+    <div id="result"></div>
+    <ul id="note"></ul>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
