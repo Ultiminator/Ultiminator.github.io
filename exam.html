@@ -1,0 +1,36 @@
+<html dir="rtl" lang="ar">
+    <head>
+        <title>Sinece</title>
+    </head>
+    <body>
+        <p>كم عدد الأعصاب المخية....</p>
+        <input id="omar1" type="radio" value="31" name="omar"> <label for="omar1">31 زوجا</label><br>
+        <input id="omar2" type="radio" value="12" name="omar"> <label for="omar2">12 زوجا</label><br>
+        <input id="omar3" type="radio" value="24" name="omar"> <label for="omar3">24 زوجا</label><br><br>
+        <button onclick="check()">ارسال</button>
+        
+        
+        <script>
+            function check(){
+                let x = document.getElementById("omar1");
+                if (x.checked == true){
+                    x.style.outline="2px solid red";
+                    document.getElementById("omar2").style.outline="2px solid green";
+                }
+                x = document.getElementById("omar2");
+                if (x.checked == true){
+                    x.style.outline="2px solid green";
+                }
+                x = document.getElementById("omar3");
+                if (x.checked == true){
+                    x.style.outline="2px solid red";
+                    document.getElementById("omar2").style.outline="2px solid green";
+                }
+                let y = document.getElementsByTagName("input");
+                for (let i = 0; i < 3; i = i + 1) {
+                    y[i].disabled = true;
+                }
+            }
+        </script>
+    </body>
+</html>
