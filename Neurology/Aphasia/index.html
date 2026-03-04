@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>Aphasia</title>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Aphasia Algorithm</h1>
+      <span>
+        The first 3 questions are required and are based on Boston Classification, 
+        while the last 3 questions are optional for further assessment of more 
+        language impairment <b>only if</b> the first 3 components are intact.
+      </span>
+    </header>
+    <fieldset>
+      <legend>Boston Classification</legend>
+      <div class="question">
+        <p>Is the patient fluent?</p>
+        <span>
+          The patient can express themselves without paraphasia, agramatism, paragramatism, 
+          reduced prosody, or recurrent utterence?
+        </span>
+        <label>
+          <input type="radio" name="verbal" value="true"> Yes
+        </label>
+        <label>
+          <input type="radio" name="verbal" value="false"> No
+        </label>
+      </div>
+      <div class="question">
+        <p>Does the patient comprehend?</p>
+        <span>
+          Your patient clearly understands what is being said to Them?
+        </span>
+        <label>
+          <input type="radio" name="comprehension" value="true"> Yes
+        </label>
+        <label>
+          <input type="radio" name="comprehension" value="false"> No
+        </label>
+      </div>
+      <div class="question">
+        <p>Can the patient repeat?</p>
+        <span>The person can repeat words or phrases?</span>
+        <label>
+          <input type="radio" name="repetition" value="true"> Yes
+        </label>
+        <label>
+          <input type="radio" name="repetition" value="false"> No
+        </label>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Additional Assessment</legend>
+      <div class="question">
+        <p>Intact naming?</p>
+        <span>
+          The patient can name objects in front of them or concepts 
+          in their head without word finding difficulty?
+        </span>
+        <label>
+          <input type="radio" name="naming" value="true"> Yes
+        </label>
+        <label>
+          <input type="radio" name="naming" value="false"> No
+        </label>
+      </div>
+      <div class="question">
+        <p>The patient reads fluently?</p>
+        <span>
+          This is of <b>no value if</b> there is already comprehension or  
+          visual impairment, or the patient is illiterate.
+        </span>
+        <label>
+          <input type="radio" name="reading" value="true"> Yes
+        </label>
+        <label>
+          <input type="radio" name="reading" value="false"> No
+        </label>
+      </div>
+      <div class="question">
+        <p>The patient writes correctly?</p>
+        <span>
+          This is of <b>no value if</b> there is already weakness or  
+          visual impairment, or the patient is illiterate.
+        </span>
+        <label>
+          <input type="radio" name="writing" value="true"> Yes
+        </label>
+        <label>
+          <input type="radio" name="writing" value="false"> No
+        </label>
+      </div>
+    </fieldset>
+    <footer>
+      <span>
+        This algorithm is designed to help in identifying the type of language impairment
+        and is based on the Boston Classification of Aphasia and additional information from
+        the book "CURRENT Diagnosis & Treatment: Neurology, 3e" for John C.M. Brust.
+      </span>
+      <span>
+        Designed and developed by Ahmed Salah.<br>
+        for source code visit <a href="https://github.com/Ultiminator/aphasia-algorithm">Github repository</a>
+      </span>
+    </footer>
+  </div>
+  <div class="result" id="result">Ahmed</div>
+  <button class="clear" onclick="startOver()">Start Over</button>
+
+  <script src="script.js"></script>
+</body>
+</html>

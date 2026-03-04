@@ -1,0 +1,133 @@
+:root {
+    --primary-color: rgb(120, 200, 100);
+    --secondary-color: rgb(255, 70, 100);
+    --bg-color: #f6f6f6;
+    --main-text-color: #444444;
+    --fade-text-color: #777777;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: "Noto Sans", sans-serif;
+    background-color: var(--bg-color);
+    color: var(--main-text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    background-color: white;
+    /* padding: 10px; */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    margin: 10px 10px 100px 10px;
+}
+header {
+    padding: 20px;
+    text-align: justify;
+}
+footer {
+    padding: 0 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+h1 {
+    font-size: 26px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.question {
+    margin: 10px;
+    padding: 15px;
+    box-shadow:  0 2px 4px var(--shadow-color);
+    border-radius: 5px;
+    background-color: var(--bg-color);
+}
+p {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+span {
+    display: block;
+    /* text-align: justify; */
+    margin: 10px 0;
+    font-size: 14px;
+    color: var(--fade-text-color);
+}
+.question label {
+    display: block;
+    margin: 15px 15px 0 0;
+    font-size: 16px;
+    font-weight: 800;
+}
+label input[type="radio"] {
+    margin-right: 10px;
+    width: 16px;
+    height: 16px;
+}
+label:has(input[value="true"]:checked) {
+    color: var(--primary-color);
+}
+label:has(input[value="false"]:checked) {
+    color: var(--secondary-color);
+}
+input[value="false"]:checked {
+    accent-color: var(--secondary-color);
+}
+input[value="true"]:checked {
+    accent-color: var(--primary-color);
+}
+
+.result {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    padding: 15px;
+    width: 100%;
+    background-color: var(--primary-color);
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+    font-size: large;
+    word-wrap: break-word;
+}
+button.clear {
+    position: fixed;
+    bottom: 120px;
+    right: 20px;
+    padding: 10px 20px;
+    color: var(--bg-color);
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 1000px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transforms ease;
+    box-shadow:  0px 0px 5px 1px var(--shadow-color);
+}
+
+button.clear:active {
+    transform:  scale(0.95);
+}
+
+fieldset {
+    border: none;
+    border-top: 1px solid var(--fade-text-color);
+    margin: 10px 0;
+}
+legend {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 0 10px ;
+    margin-left: 10px;
+    text-transform: uppercase;
+}
