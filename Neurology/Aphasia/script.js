@@ -49,11 +49,11 @@ function assess(answers) {
         }else if (answers.writing === 'false' && answers.reading === 'false') {
             return '<b>MIXED AGRAPHIA & ALEXIA</b><br>The lesion mostly involves Angular and Supramarginal Gyri';
         }else if (answers.writing === 'false' /*&& (answers.reading === 'true' || answers.reading === null)*/){
-            return '<b>AGRAPHIA</b><br>The lesion mostly involves Exner\'s Area';
+            return '<b>AGRAPHIA</b><br>The lesion may involve Exner\'s Area or Angular gyrus as a part of Gerstmann syndrome';
         } else if (answers.reading === 'false' /*&& (answers.writing === 'true' || answers.writing === null)*/) {
             return '<b>ALEXIA</b><br>The lesion mostly involves Visual Association area';
         } else {
-            return 'It seems your patient does not have language impairment.<br> consider other causes of Cognitive impairment.';
+            return 'It seems there is no language impairment.<br> Consider other Cognitive impairments.';
         }
     }
 }
@@ -78,4 +78,5 @@ document.querySelectorAll('input[type="radio"]').forEach(radio => {
 function startOver() {
     document.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false);
     document.getElementById('result').style.display = 'none';
+
 }
